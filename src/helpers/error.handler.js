@@ -44,3 +44,12 @@ export function errorHandler(response, status, message, data) {
         }
     }
 }
+
+export function configureValidationErrors(error) {
+    return error.details.reduce((acc, error) => {
+        const field = error.path[0];
+        if (!acc[field]) acc[field] = { errors: [] };
+        acc[field].errors.push(error.message);
+        return acc;
+    }, {});
+}

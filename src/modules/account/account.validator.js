@@ -1,5 +1,7 @@
-import { errorHandler } from "../../helpers/error.handler.js";
 import Joi from "joi";
+import {
+    errorHandler,
+    configureValidationErrors } from "../../helpers/error.handler.js";
 
 export const email = Joi.string().email({ tlds: { allow: true } }).required().messages({
     // Email messages
@@ -41,20 +43,44 @@ export function signUpValidator(request, response, next) {
         const { error } = configSignUpSchema.validate(request.body, { allowUnknown: false, abortEarly: false });
 
         if (error) {
-            console.log(error);
             if (error.details.some(err => err.type === "object.unknown")) {
                 return errorHandler(response, 401, "Invalid parameters in the body request. Verify the documentation to continue.");
             }
 
-            const configureErrors = error.details.reduce((acc, error) => {
-                const fields = error.path[0];
-                if (!acc[fields]) acc[fields] = { errors: [] };
+            const configuredErrors = configureValidationErrors(error);
+            return errorHandler(response, 400, "Invalid field in the body request.", configuredErrors);
+        }
 
-                acc[fields].errors.push(error.message);
-                return acc;
-            }, {});
+        next();
 
-            return errorHandler(response, 400, "Invalid field in the body request.", configureErrors);
+    } catch (error) { return errorHandler(response, 500, "Internal server error."); }
+}
+
+export function logInValidator(request, response, next) {
+    try {
+        const configLogInSchema = Joi.object({
+            user: Joi.alternatives().try(email, username).required().messages({
+                "alternatives.match": "The field must contain a valid email or username.",
+                "any.required": "User is required.",
+            }),
+            password,
+        });
+
+        const { error, value } = configLogInSchema.validate(request.body, { allowUnknown: false, abortEarly: false });
+
+        if (error) {
+            if (error.details.some(err => err.type === "object.unknown")) {
+                return errorHandler(response, 401, "Invalid parameters in the body request. Verify the documentation to continue.");
+            }
+
+            const configuredErrors = configureValidationErrors(error);
+            return errorHandler(response, 400, "Invalid field in the body request.", configuredErrors);
+        }
+
+        if (email.validate(value.user).error === undefined) {
+            request.body.loginType = "email";
+        } else if (username.validate(value.user).error === undefined) {
+            request.body.loginType = "username";
         }
 
         next();
