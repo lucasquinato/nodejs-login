@@ -34,6 +34,22 @@ NodeJS Login é uma API que implementa funcionalidades básicas de autenticaçã
    npm install
    ```
 
+3. Crie um arquivo `.env` na raiz do projeto com as seguintes características:
+   ```env
+   # SERVER
+   SERVER_PORT="3000"
+
+   # DATABASE
+   DATABASE_SCHEMA="nodejs_login"
+   DATABASE_USERNAME="root"
+   DATABASE_PASSWORD="263130"
+   DATABASE_HOSTNAME="localhost"
+   DATABASE_PORT="3306"
+
+   # JSONWEBTOKEN
+   JWT_SECRET_KEY="lsidhaj-KFEUHAUI-kjhdn"
+   ```
+
 ## Execução
 
 ### Ambiente de Desenvolvimento
@@ -56,8 +72,9 @@ npm run start
 - Exemplo de corpo da requisição:
   ```json
   {
-    "username": "exampleUser",
-    "password": "examplePassword"
+    "email": "exemple@email.com",
+    "username": "exemple",
+    "password": "Exemple123"
   }
   ```
 
@@ -68,8 +85,8 @@ npm run start
 - Exemplo de corpo da requisição:
   ```json
   {
-    "usernameOrEmail": "exampleUserOrEmail",
-    "password": "examplePassword"
+    "user": "username OR email",
+    "password": "Exemple123"
   }
   ```
 
