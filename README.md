@@ -67,7 +67,7 @@ npm run start
 ## Rotas da API
 
 ### 1. Cadastro de Conta
-**POST /signup**
+**POST /account/signup/**
 - Permite registrar um novo usuário.
 - Exemplo de corpo da requisição:
   ```json
@@ -79,7 +79,7 @@ npm run start
   ```
 
 ### 2. Login de Conta
-**POST /login**
+**POST /account/login/**
 - Autentica o usuário e retorna um token JWT.
 - Permite autenticação utilizando um username ou email.
 - Exemplo de corpo da requisição:
@@ -91,7 +91,7 @@ npm run start
   ```
 
 ### 3. Página Restrita
-**GET /restricted**
+**GET /protected/**
 - Acessível apenas com um JWT válido.
 - O token é enviado automaticamente pelo servidor via cookies, não sendo necessário incluí-lo manualmente na requisição.
 
