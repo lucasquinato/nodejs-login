@@ -25,8 +25,8 @@ NodeJS Login é uma API que implementa funcionalidades básicas de autenticaçã
 
 1. Clone este repositório:
    ```bash
-   git clone <URL_DO_REPOSITORIO>
-   cd <NOME_DO_DIRETORIO>
+   git clone https://github.com/lucasquinato/nodejs-login
+   cd nodejs-login
    ```
 
 2. Instale as dependências:
@@ -37,17 +37,17 @@ NodeJS Login é uma API que implementa funcionalidades básicas de autenticaçã
 3. Crie um arquivo `.env` na raiz do projeto com as seguintes características:
    ```env
    # SERVER
-   SERVER_PORT="3000"
+   SERVER_PORT="??"
 
    # DATABASE
-   DATABASE_SCHEMA="nodejs_login"
-   DATABASE_USERNAME="root"
-   DATABASE_PASSWORD="263130"
-   DATABASE_HOSTNAME="localhost"
-   DATABASE_PORT="3306"
+   DATABASE_SCHEMA="??"
+   DATABASE_USERNAME="??"
+   DATABASE_PASSWORD="??"
+   DATABASE_HOSTNAME="??"
+   DATABASE_PORT="??"
 
    # JSONWEBTOKEN
-   JWT_SECRET_KEY="lsidhaj-KFEUHAUI-kjhdn"
+   JWT_SECRET_KEY="??"
    ```
 
 ## Execução
